@@ -1,0 +1,79 @@
+<%- include("partials/header.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/blogg.css">
+</head>
+<body>
+    <!-- Knapp för att skapa en blogg -->
+    <button id="myButton">Skapa en Blogg</button>
+
+    <!-- Popup-formulär för att skapa en blogg -->
+    <div id="myPopup" class="popup">
+        <form class="popup-content" action="/create" method="post">
+            <h1>Skapa blogg!</h1>
+            <p>Titel:</p>
+            <input type="text" id="Titel" name="title" required> <br>
+            <p>Lösenord:</p>
+            <input type="text" id="Lösenord" name="password" required> <br>
+            <input type="submit" value="Skapa">
+            <button type="button" id="closePopup">Avbryt</button>
+        </form>
+    </div>
+
+    <!-- Visar bloggtitlar och knappar för att ta bort dem -->
+    <div id="TitelDisplay">
+        <% blogs.forEach((blog, index) => { %>
+            <div class="blog-link">
+                <a href="/room?title=<%= encodeURIComponent(blog.title) %>"><%= blog.title %></a>
+                <button type="button" onclick='confirmDeletion("<%= index %>")'>Ta Bort</button>
+            </div>
+        <% }) %>
+    </div>
+
+    <!-- Visar felmeddelande om det finns något -->
+    <% if (error) { %>
+        <div class="error"><%= error %></div>
+    <% } %>
+
+    <script>
+        // Hanterar popup för att skapa blogg
+        const myButton = document.getElementById("myButton");
+        const closePopup = document.getElementById("closePopup");
+        const myPopup = document.getElementById("myPopup");
+        
+        myButton.addEventListener("click", function () {
+            myPopup.classList.add("show");
+        });
+
+        closePopup.addEventListener("click", function (event) {
+            event.preventDefault();
+            myPopup.classList.remove("show");
+        });
+
+        window.addEventListener("click", function (event) {
+            if (event.target === myPopup) {
+                myPopup.classList.remove("show");
+            }
+        });
+
+
+        // Funktion för att bekräfta radering av blogg
+        function confirmDeletion(index) {
+            const password = prompt("Skriv lösenord för radera:");
+            if (password === 'abc123') {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `/delete/${index}`;
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+                alert('Fel lösenord!');
+            }
+        }
+    </script>
+</body>
+</html>
+
+<%- include("partials/footer.ejs") %>

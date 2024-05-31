@@ -1,0 +1,53 @@
+<%- include("partials/header.ejs") %>
+<link rel="stylesheet" href="/blogg.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Läsare <%= title %></title>
+    <link rel="stylesheet" href="/blogg.css">
+</head>
+<body>
+    <h1>Välkommen till <%= title %></h1>
+
+    <!-- Knapp för att redigera bloggen -->
+    <button id="editButton" onclick="promptForPassword('<%= title %>')">Redigera</button>
+
+        <!-- Visar alla inlägg -->
+    <% posts.forEach(post => { %>
+        <div class="post">
+            <% if (post.image) { %>
+                <img src="/uploads/<%= post.image %>" alt="Post Image" class="image-post">
+            <% } %>
+            <p><%= post.text %></p>
+        </div>
+    <% }) %>
+
+    <script>
+    // Ber om lösenord för att redigera bloggen
+    function promptForPassword(title) {
+        const password = prompt("Skriv rätt lösenord för att redigera:");
+        if (password !== null && password.trim() !== "") {
+            fetch('/verify-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `password=${encodeURIComponent(password)}&title=${encodeURIComponent(title)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = `/edit-room?title=${encodeURIComponent(title)}`;
+                } else {
+                    alert(data.error);
+                }
+            });
+        }
+    }
+    </script>
+    
+</body>
+</html>
+
+<%- include("partials/footer.ejs") %>

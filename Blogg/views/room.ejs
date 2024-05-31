@@ -1,0 +1,71 @@
+<%- include("partials/header.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/blogg.css">
+</head>
+<body>
+    <h1>Välkommen till <%= title %></h1>
+
+    <!-- Formulär för att skicka nya inlägg -->
+    <form id="postForm" enctype="multipart/form-data" method="post" action="/post">
+        <textarea name="text" id="Text" rows="10" cols="100"></textarea>
+        <br>
+        <input type="hidden" name="room" value="<%= title %>">
+        <input type="submit" id="skicka" value="Skicka">
+        <input type="file" id="myFile" name="filename">
+    </form>
+    
+    <!-- Tillbaka-knapp -->
+    <button onclick="window.location.href='/room?title=<%= encodeURIComponent(title) %>'">Tillbaka</button>
+
+    <!-- Visar alla inlägg -->
+    <div id="DisplayArea">
+        <% posts.forEach((post, index) => { %>
+            <div class="post" data-index="<%= index %>">
+                <div class="text-post"><%= post.text %></div>
+                <% if (post.image) { %>
+                    <img src="/uploads/<%= post.image %>" class="image-post">
+                <% } %>
+            </div>
+        <% }) %>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.post').forEach(postElement => {
+                postElement.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    
+                    // Bekräftelse innan radering av inlägg
+                    if (confirm("Är du säker att du vill radera detta inlägg?")) {
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = '/delete-post';
+        
+                        const roomInput = document.createElement('input');
+                        roomInput.type = 'hidden';
+                        roomInput.name = 'room';
+                        roomInput.value = '<%= title %>';
+        
+                        const indexInput = document.createElement('input');
+                        indexInput.type = 'hidden';
+                        indexInput.name = 'index';
+                        indexInput.value = index;
+        
+                        form.appendChild(roomInput);
+                        form.appendChild(indexInput);
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
+            });
+        });
+        </script>
+        
+        
+</body>
+</html>
+
+<%- include("partials/footer.ejs") %>

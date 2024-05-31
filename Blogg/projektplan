@@ -1,0 +1,32 @@
+Vilka huvudfunktioner ska bloggplattformen ha?
+Skapa och radera blogg, användarhantering, läsläge, författarläge/edit mode, lägga in text och bilder.
+
+Vilka användarroller finns det och vilka behörigheter har de?
+Författare/administratörer och läsare. Så länge man kan koden har man tillgång till allt. 
+
+Vilka funktioner ska du ha för att författare ska kunna skapa och redigera inlägg?
+skapa och ta bort bloggar, redigera text och bilder.
+
+Vilka funktioner krävs för läsare att navigera, läsa och kommentera inlägg?
+Läsaren har tillgång till att klicka länkarna på headern och läsa bloggarna som författaren har skapat.
+
+Hur ska applikationen hantera autentisering och auktorisering av användare (dvs kan alla
+redigera bloggen eller bara de med rätt behörighet)?
+Programmet kräver en kod om man ska utföra viktiga saker som skapa/ta bort bloggar, redigera text och bild innehåll. kod abc123
+
+Hur ska användargränssnittet designas för att vara användarvänligt och tilltalande?
+Väldigt simpelt program med ingenting överväldigande.
+
+Vilka sidor och funktioner behöver olika användartyper ha tillgång till?
+Läsare har startsida, kontakta mig, om mig och tillgång till att läsläge i bloggsidan.
+Författaren har allt som läsaren har plus tillgång till redigeringsläge.
+
+Hur ska navigationen vara strukturerad för att underlätta för användarna att hitta det de
+behöver?
+Det finns olika välplacerade knappar användare kan klicka på för att navigera runt sidan. Tex, en knapp på header som tar dig tillbaka till startsidan.
+
+Hur ska inlägg och kommentarer presenteras för användare?
+Bloggarna presenteras i startsidan som användaren kan klicka i för att se innehållen i specifika bloggar. I bloggarna kan man både finna text och bilder.
+
+Vilka interaktionsmöjligheter behövs för att hantera inlägg, kommentarer och användare?
+Har inte hunnit med att lägga 

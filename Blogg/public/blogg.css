@@ -1,0 +1,89 @@
+body{
+  background-color: rgb(144, 192, 231);
+}
+
+#myButton{
+  margin-top: 50px;
+  margin-left: 30px;
+}
+
+#TitelDisplay{
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.popup {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(
+      0,
+      0,
+      0,
+      0.4
+  );
+  display: none;
+}
+.popup-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888888;
+  width: 30%;
+  font-weight: bolder;
+}
+.popup-content button {
+  margin: 0 auto;
+}
+.show {
+  display: block;
+}
+
+#DisplayArea {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin: 20px;
+}
+
+img.image-post {
+  width: 25% !important;
+  height: auto;
+}
+
+#head{
+  margin-right: 30%;
+}
+
+#foot{
+  margin-top: 40%;
+}
+
+.text-post, .image-post {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.text-post:hover, .image-post:hover {
+  background-color: red; 
+}
+
+.image-post {
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.image-post:hover {
+  border: 2px solid red;
+  transition: background-color 0.2s;
+}
+
+.image-container {
+  position: relative;
+  cursor: pointer;
+}
